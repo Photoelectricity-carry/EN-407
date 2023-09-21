@@ -23,7 +23,7 @@
 #include "motor.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-int speed;
+float  speed;
 float angle;
 int zj;
 /* USER CODE END Includes */
@@ -107,8 +107,23 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		speed=Get_Speed();
-		angle =Get_Angle();
+		
+//		speed=Get_Speed();
+
+//		speed=0;
+		angle =Get_Angle(); 
+		zj=(short)TIM2->CNT;
+		TIM2->CNT=0;
+    speed = ((float)zj*3.1415926*2*0.0334)/(0.00091*13500);
+//		if(angle>=360)
+//		{
+//			angle-=360;
+//		}
+//			if(angle<=-360)
+//			{
+//				angle+=360;
+//			}		
+HAL_Delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
